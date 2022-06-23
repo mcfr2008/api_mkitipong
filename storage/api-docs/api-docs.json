@@ -1,0 +1,2417 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API-MKITIPONG",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "login",
+                "description": "Login by email, password",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unprocessable Entity"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "register",
+                "description": "Login by email, password",
+                "operationId": "authRegister",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "user1"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User successfully registered"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "logout",
+                "description": "Logout user and invalidate token",
+                "operationId": "authLogout",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/refresh": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "refresh",
+                "description": "refresh invalidate token",
+                "operationId": "authreFresh",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/user-profile": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "userProfile",
+                "description": "",
+                "operationId": "authUserProfile",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/clear-route-cache": {
+            "get": {
+                "tags": [
+                    "clear-cache"
+                ],
+                "summary": "clear-route-cache",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "All routes cache has just been removed"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/clear-config-cache": {
+            "get": {
+                "tags": [
+                    "clear-cache"
+                ],
+                "summary": "clear-config-cache",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Config cache has just been removed"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/clear-app-cache": {
+            "get": {
+                "tags": [
+                    "clear-cache"
+                ],
+                "summary": "clear-app-cache",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Application cache has just been removed"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/clear-view-cache": {
+            "get": {
+                "tags": [
+                    "clear-cache"
+                ],
+                "summary": "clear-view-cache",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "View cache has jut been removed"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/emails": {
+            "get": {
+                "tags": [
+                    "email"
+                ],
+                "summary": "email information",
+                "description": "Returns email data",
+                "operationId": "App\\Http\\Controllers\\EmailController::index",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "email"
+                ],
+                "summary": "add email",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\EmailController::store",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "people_id",
+                                    "name",
+                                    "address",
+                                    "other_details"
+                                ],
+                                "properties": {
+                                    "people_id": {
+                                        "type": "integer",
+                                        "format": "people_id",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "user1"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "address",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "other_details": {
+                                        "type": "string",
+                                        "format": "other_details",
+                                        "example": "detail"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/emails/{id}": {
+            "get": {
+                "tags": [
+                    "email"
+                ],
+                "summary": "email information",
+                "description": "Returns email data",
+                "operationId": "App\\Http\\Controllers\\EmailController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "email id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "email"
+                ],
+                "summary": "update email",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\EmailController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "email id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "people_id",
+                                    "name",
+                                    "address",
+                                    "other_details"
+                                ],
+                                "properties": {
+                                    "people_id": {
+                                        "type": "integer",
+                                        "format": "people_id",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "user1"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "address",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "other_details": {
+                                        "type": "string",
+                                        "format": "other_details",
+                                        "example": "detail"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "email"
+                ],
+                "summary": "delete email",
+                "description": "delete data",
+                "operationId": "App\\Http\\Controllers\\EmailController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "email id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/emails/del/{id}": {
+            "put": {
+                "tags": [
+                    "email"
+                ],
+                "summary": "disable status email",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\EmailController::del",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "email id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eucations": {
+            "get": {
+                "tags": [
+                    "eucation"
+                ],
+                "summary": "eucation information",
+                "description": "Returns eucation data",
+                "operationId": "App\\Http\\Controllers\\EucationController::index",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "eucation"
+                ],
+                "summary": "add eucation",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\EucationController::store",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "people_id",
+                                    "level",
+                                    "degree",
+                                    "branch",
+                                    "faculty",
+                                    "academy",
+                                    "gpa",
+                                    "graduation_date",
+                                    "other_details"
+                                ],
+                                "properties": {
+                                    "people_id": {
+                                        "type": "integer",
+                                        "format": "people_id",
+                                        "example": "1"
+                                    },
+                                    "level": {
+                                        "type": "string",
+                                        "format": "level",
+                                        "example": "level"
+                                    },
+                                    "degree": {
+                                        "type": "string",
+                                        "format": "degree",
+                                        "example": "degree"
+                                    },
+                                    "branch": {
+                                        "type": "string",
+                                        "format": "branch",
+                                        "example": "branch"
+                                    },
+                                    "faculty": {
+                                        "type": "string",
+                                        "format": "faculty",
+                                        "example": "faculty"
+                                    },
+                                    "academy": {
+                                        "type": "string",
+                                        "format": "academy",
+                                        "example": "academy"
+                                    },
+                                    "gpa": {
+                                        "type": "string",
+                                        "format": "gpa",
+                                        "example": "gpa"
+                                    },
+                                    "graduation_date": {
+                                        "type": "date",
+                                        "format": "graduation_date",
+                                        "example": "2021-01-01"
+                                    },
+                                    "other_details": {
+                                        "type": "string",
+                                        "format": "other_details",
+                                        "example": "detail"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eucations/{id}": {
+            "get": {
+                "tags": [
+                    "eucation"
+                ],
+                "summary": "eucation information",
+                "description": "Returns eucation data",
+                "operationId": "App\\Http\\Controllers\\EucationController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "eucation id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "eucation"
+                ],
+                "summary": "update eucation",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\EucationController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "eucation id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "people_id",
+                                    "level",
+                                    "degree",
+                                    "branch",
+                                    "faculty",
+                                    "academy",
+                                    "gpa",
+                                    "graduation_date",
+                                    "other_details"
+                                ],
+                                "properties": {
+                                    "people_id": {
+                                        "type": "integer",
+                                        "format": "people_id",
+                                        "example": "1"
+                                    },
+                                    "level": {
+                                        "type": "string",
+                                        "format": "level",
+                                        "example": "level"
+                                    },
+                                    "degree": {
+                                        "type": "string",
+                                        "format": "degree",
+                                        "example": "degree"
+                                    },
+                                    "branch": {
+                                        "type": "string",
+                                        "format": "branch",
+                                        "example": "branch"
+                                    },
+                                    "faculty": {
+                                        "type": "string",
+                                        "format": "faculty",
+                                        "example": "faculty"
+                                    },
+                                    "academy": {
+                                        "type": "string",
+                                        "format": "academy",
+                                        "example": "academy"
+                                    },
+                                    "gpa": {
+                                        "type": "string",
+                                        "format": "gpa",
+                                        "example": "gpa"
+                                    },
+                                    "graduation_date": {
+                                        "type": "date",
+                                        "format": "graduation_date",
+                                        "example": "2021-01-01"
+                                    },
+                                    "other_details": {
+                                        "type": "string",
+                                        "format": "other_details",
+                                        "example": "detail"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "eucation"
+                ],
+                "summary": "delete eucation",
+                "description": "delete data",
+                "operationId": "App\\Http\\Controllers\\EucationController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "eucation id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eucations/del/{id}": {
+            "put": {
+                "tags": [
+                    "eucation"
+                ],
+                "summary": "disable status eucation",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\EucationController::del",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "eucation id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/show-user-location-data": {
+            "get": {
+                "tags": [
+                    "location"
+                ],
+                "summary": "user location",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\LocationController::index",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/organizations": {
+            "get": {
+                "tags": [
+                    "organization"
+                ],
+                "summary": "organization information",
+                "description": "Returns organization data",
+                "operationId": "App\\Http\\Controllers\\OrganizationController::index",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "organization"
+                ],
+                "summary": "add organization",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\OrganizationController::store",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "address",
+                                    "other_details"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "user1"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "address",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "other_details": {
+                                        "type": "string",
+                                        "format": "other_details",
+                                        "example": "detail"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/organizations/{id}": {
+            "get": {
+                "tags": [
+                    "organization"
+                ],
+                "summary": "organization information",
+                "description": "Returns organization data",
+                "operationId": "App\\Http\\Controllers\\OrganizationController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "organization id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "organization"
+                ],
+                "summary": "update organization",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\OrganizationController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "organization id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "address",
+                                    "other_details"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "user1"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "address",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "other_details": {
+                                        "type": "string",
+                                        "format": "other_details",
+                                        "example": "detail"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "organization"
+                ],
+                "summary": "delete organization",
+                "description": "delete data",
+                "operationId": "App\\Http\\Controllers\\OrganizationController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "organization id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/organizations/del/{id}": {
+            "put": {
+                "tags": [
+                    "organization"
+                ],
+                "summary": "disable status organization",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\OrganizationController::del",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "organization id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/peoples": {
+            "get": {
+                "tags": [
+                    "people"
+                ],
+                "summary": "people information",
+                "description": "Returns people data",
+                "operationId": "App\\Http\\Controllers\\PeopleController::index",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "people"
+                ],
+                "summary": "add people",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\PeopleController::store",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "organization_id",
+                                    "military_status_id",
+                                    "registered_peoples_YN",
+                                    "prefix_name",
+                                    "first_name",
+                                    "last_name",
+                                    "nickname",
+                                    "gender",
+                                    "blood_type",
+                                    "birth_date",
+                                    "citizenid",
+                                    "nationality_name",
+                                    "religion_name",
+                                    "country_address_detail_1",
+                                    "country_address_detail_2",
+                                    "country_address_district",
+                                    "country_address_province",
+                                    "country_address_postcode",
+                                    "current_address_detail_1",
+                                    "current_address_detail_2",
+                                    "current_address_district",
+                                    "current_address_province",
+                                    "current_address_postcode",
+                                    "current_height",
+                                    "current_weight"
+                                ],
+                                "properties": {
+                                    "organization_id": {
+                                        "type": "integer",
+                                        "format": "organization_id",
+                                        "example": "organization_id"
+                                    },
+                                    "military_status_id": {
+                                        "type": "integer",
+                                        "format": "military_status_id",
+                                        "example": "military_status_id"
+                                    },
+                                    "registered_peoples_YN": {
+                                        "type": "boolean",
+                                        "format": "registered_peoples_YN",
+                                        "example": "registered_peoples_YN"
+                                    },
+                                    "prefix_name": {
+                                        "type": "string",
+                                        "format": "prefix_name",
+                                        "example": "prefix_name"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "format": "first_name",
+                                        "example": "first_name"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "format": "last_name",
+                                        "example": "last_name"
+                                    },
+                                    "nickname": {
+                                        "type": "string",
+                                        "format": "nickname",
+                                        "example": "nickname"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "format": "gender",
+                                        "example": "gender"
+                                    },
+                                    "blood_type": {
+                                        "type": "string",
+                                        "format": "blood_type",
+                                        "example": "blood_type"
+                                    },
+                                    "birth_date": {
+                                        "type": "date",
+                                        "format": "birth_date",
+                                        "example": "birth_date"
+                                    },
+                                    "citizenid": {
+                                        "type": "string",
+                                        "format": "citizenid",
+                                        "example": "citizenid"
+                                    },
+                                    "nationality_name": {
+                                        "type": "string",
+                                        "format": "nationality_name",
+                                        "example": "nationality_name"
+                                    },
+                                    "religion_name": {
+                                        "type": "string",
+                                        "format": "religion_name",
+                                        "example": "religion_name"
+                                    },
+                                    "country_address_detail_1": {
+                                        "type": "string",
+                                        "format": "country_address_detail_1",
+                                        "example": "country_address_detail_1"
+                                    },
+                                    "country_address_detail_2": {
+                                        "type": "string",
+                                        "format": "country_address_detail_2",
+                                        "example": "country_address_detail_2"
+                                    },
+                                    "country_address_district": {
+                                        "type": "string",
+                                        "format": "country_address_district",
+                                        "example": "country_address_district"
+                                    },
+                                    "country_address_province": {
+                                        "type": "string",
+                                        "format": "country_address_province",
+                                        "example": "country_address_province"
+                                    },
+                                    "country_address_postcode": {
+                                        "type": "string",
+                                        "format": "country_address_postcode",
+                                        "example": "country_address_postcode"
+                                    },
+                                    "current_address_detail_1": {
+                                        "type": "string",
+                                        "format": "current_address_detail_1",
+                                        "example": "current_address_detail_1"
+                                    },
+                                    "current_address_detail_2": {
+                                        "type": "string",
+                                        "format": "current_address_detail_2",
+                                        "example": "current_address_detail_2"
+                                    },
+                                    "current_address_district": {
+                                        "type": "string",
+                                        "format": "current_address_district",
+                                        "example": "current_address_district"
+                                    },
+                                    "current_address_province": {
+                                        "type": "string",
+                                        "format": "current_address_province",
+                                        "example": "current_address_province"
+                                    },
+                                    "current_address_postcode": {
+                                        "type": "string",
+                                        "format": "current_address_postcode",
+                                        "example": "current_address_postcode"
+                                    },
+                                    "current_height": {
+                                        "type": "string",
+                                        "format": "current_height",
+                                        "example": "current_height"
+                                    },
+                                    "current_weight": {
+                                        "type": "string",
+                                        "format": "current_weight",
+                                        "example": "current_weight"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/peoples/{id}": {
+            "get": {
+                "tags": [
+                    "people"
+                ],
+                "summary": "people information",
+                "description": "Returns people data",
+                "operationId": "App\\Http\\Controllers\\PeopleController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "people id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "people"
+                ],
+                "summary": "update people",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\PeopleController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "people id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "organization_id",
+                                    "military_status_id",
+                                    "registered_peoples_YN",
+                                    "prefix_name",
+                                    "first_name",
+                                    "last_name",
+                                    "nickname",
+                                    "gender",
+                                    "blood_type",
+                                    "birth_date",
+                                    "citizenid",
+                                    "nationality_name",
+                                    "religion_name",
+                                    "country_address_detail_1",
+                                    "country_address_detail_2",
+                                    "country_address_district",
+                                    "country_address_province",
+                                    "country_address_postcode",
+                                    "current_address_detail_1",
+                                    "current_address_detail_2",
+                                    "current_address_district",
+                                    "current_address_province",
+                                    "current_address_postcode",
+                                    "current_height",
+                                    "current_weight"
+                                ],
+                                "properties": {
+                                    "organization_id": {
+                                        "type": "integer",
+                                        "format": "organization_id",
+                                        "example": "organization_id"
+                                    },
+                                    "military_status_id": {
+                                        "type": "integer",
+                                        "format": "military_status_id",
+                                        "example": "military_status_id"
+                                    },
+                                    "registered_peoples_YN": {
+                                        "type": "boolean",
+                                        "format": "registered_peoples_YN",
+                                        "example": "registered_peoples_YN"
+                                    },
+                                    "prefix_name": {
+                                        "type": "string",
+                                        "format": "prefix_name",
+                                        "example": "prefix_name"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "format": "first_name",
+                                        "example": "first_name"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "format": "last_name",
+                                        "example": "last_name"
+                                    },
+                                    "nickname": {
+                                        "type": "string",
+                                        "format": "nickname",
+                                        "example": "nickname"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "format": "gender",
+                                        "example": "gender"
+                                    },
+                                    "blood_type": {
+                                        "type": "string",
+                                        "format": "blood_type",
+                                        "example": "blood_type"
+                                    },
+                                    "birth_date": {
+                                        "type": "date",
+                                        "format": "birth_date",
+                                        "example": "birth_date"
+                                    },
+                                    "citizenid": {
+                                        "type": "string",
+                                        "format": "citizenid",
+                                        "example": "citizenid"
+                                    },
+                                    "nationality_name": {
+                                        "type": "string",
+                                        "format": "nationality_name",
+                                        "example": "nationality_name"
+                                    },
+                                    "religion_name": {
+                                        "type": "string",
+                                        "format": "religion_name",
+                                        "example": "religion_name"
+                                    },
+                                    "country_address_detail_1": {
+                                        "type": "string",
+                                        "format": "country_address_detail_1",
+                                        "example": "country_address_detail_1"
+                                    },
+                                    "country_address_detail_2": {
+                                        "type": "string",
+                                        "format": "country_address_detail_2",
+                                        "example": "country_address_detail_2"
+                                    },
+                                    "country_address_district": {
+                                        "type": "string",
+                                        "format": "country_address_district",
+                                        "example": "country_address_district"
+                                    },
+                                    "country_address_province": {
+                                        "type": "string",
+                                        "format": "country_address_province",
+                                        "example": "country_address_province"
+                                    },
+                                    "country_address_postcode": {
+                                        "type": "string",
+                                        "format": "country_address_postcode",
+                                        "example": "country_address_postcode"
+                                    },
+                                    "current_address_detail_1": {
+                                        "type": "string",
+                                        "format": "current_address_detail_1",
+                                        "example": "current_address_detail_1"
+                                    },
+                                    "current_address_detail_2": {
+                                        "type": "string",
+                                        "format": "current_address_detail_2",
+                                        "example": "current_address_detail_2"
+                                    },
+                                    "current_address_district": {
+                                        "type": "string",
+                                        "format": "current_address_district",
+                                        "example": "current_address_district"
+                                    },
+                                    "current_address_province": {
+                                        "type": "string",
+                                        "format": "current_address_province",
+                                        "example": "current_address_province"
+                                    },
+                                    "current_address_postcode": {
+                                        "type": "string",
+                                        "format": "current_address_postcode",
+                                        "example": "current_address_postcode"
+                                    },
+                                    "current_height": {
+                                        "type": "string",
+                                        "format": "current_height",
+                                        "example": "current_height"
+                                    },
+                                    "current_weight": {
+                                        "type": "string",
+                                        "format": "current_weight",
+                                        "example": "current_weight"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "people"
+                ],
+                "summary": "delete people",
+                "description": "delete data",
+                "operationId": "App\\Http\\Controllers\\PeopleController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "people id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/specials": {
+            "get": {
+                "tags": [
+                    "special"
+                ],
+                "summary": "special information",
+                "description": "Returns special data",
+                "operationId": "App\\Http\\Controllers\\SpecialController::index",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "special"
+                ],
+                "summary": "add special",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\SpecialController::store",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "address",
+                                    "other_details"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "user1"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "address",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "other_details": {
+                                        "type": "string",
+                                        "format": "other_details",
+                                        "example": "detail"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/specials/{id}": {
+            "get": {
+                "tags": [
+                    "special"
+                ],
+                "summary": "special information",
+                "description": "Returns special data",
+                "operationId": "App\\Http\\Controllers\\SpecialController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "special id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "special"
+                ],
+                "summary": "update special",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\SpecialController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "special id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "address",
+                                    "other_details"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "user1"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "address",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "other_details": {
+                                        "type": "string",
+                                        "format": "other_details",
+                                        "example": "detail"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "special"
+                ],
+                "summary": "delete special",
+                "description": "delete data",
+                "operationId": "App\\Http\\Controllers\\SpecialController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "special id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/specials/del/{id}": {
+            "put": {
+                "tags": [
+                    "special"
+                ],
+                "summary": "disable status special",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\SpecialController::del",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "special id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
